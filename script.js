@@ -26,16 +26,23 @@ function runTimer() {
   theTimer.innerHTML = currentTime;
   timer[3]++;
 
-  timer[0] = Math.floor(leadingZero(timer[3]) / 100 / 60);
-  timer[1] = Math.floor(leadingZero(timer[3]) / 100 - timer[0] * 60);
-  timer[2] = Math.floor(
-    leadingZero(timer[3]) - timer[1] * 100 - timer[0] * 6000
-  );
+  timer[0] = Math.floor(timer[3] / 100 / 60);
+  timer[1] = Math.floor(timer[3] / 100 - timer[0] * 60);
+  timer[2] = Math.floor(timer[3] - timer[1] * 100 - timer[0] * 6000);
 }
 
 // Match the text entered with the provided text on the page:
 function spellCheck() {
   let textEntered = textArea.value;
+  let originTextMatch = originText.substring(0, textEntered.length);
+  if (textEntered == originTextMatch) {
+    testWrapper.style.borderColor = "blue";
+  } else if (textEntered == originText) {
+    testWrapper.style.borderColor = "red";
+  } else {
+    testWrapper.style.borderColor = "green";
+  }
+
   console.log(textEntered);
 }
 
