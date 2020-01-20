@@ -4,6 +4,9 @@ const originText = document.querySelector("#origin-text p").innerHTML;
 const resetButton = document.querySelector("#reset");
 const theTimer = document.querySelector(".timer");
 
+var interval = "";
+var timerRunning = false;
+
 // Add leading zero to numbers 9 or below (purely for aesthetics):
 
 function leadingZero(time) {
@@ -31,32 +34,40 @@ function runTimer() {
   timer[2] = Math.floor(timer[3] - timer[1] * 100 - timer[0] * 6000);
 }
 
-// Match the text entered with the provided text on the page:
+// Match the text entered with the static provided text on the page:
 function spellCheck() {
-  let textEntered = textArea.value;
+  var textEntered = textArea.value;
   let originTextMatch = originText.substring(0, textEntered.length);
-  if (textEntered == originTextMatch) {
-    testWrapper.style.borderColor = "blue";
-  } else if (textEntered == originText) {
-    testWrapper.style.borderColor = "red";
-  } else {
+  if (textEntered == originText) {
+    clearInterval(interval);
     testWrapper.style.borderColor = "green";
+  } else if (textEntered == originTextMatch) {
+    testWrapper.style.borderColor = "blue";
+  } else {
+    testWrapper.style.borderColor = "orange";
   }
-
   console.log(textEntered);
 }
 
-// Start the timer:
+// Start the timer and assign the interval variable
 function start() {
   let textEnteredLength = textArea.value.length;
-  if (textEnteredLength === 0) {
-    setInterval(runTimer, 10);
+  if (textEnteredLength === 0 && !timerRunning) {
+    timerRunning = true;
+    interval = setInterval(runTimer, 10);
   }
 }
 
 // Reset everything:
 function reset() {
-  console.log("Reset button has been clicked");
+  clearInterval(interval);
+  interval = null;
+  timer = [0,0,0,0];
+  timerRunning = false;
+
+  textArea.value = "";
+  theTimer.innerHTML = "00:00:00";
+  testWrapper.style.borderColor = "grey";
 }
 
 // Event listeners for keyboard input and the reset button:
