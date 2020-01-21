@@ -62,7 +62,7 @@ function start() {
 function reset() {
   clearInterval(interval);
   interval = null;
-  timer = [0,0,0,0];
+  timer = [0, 0, 0, 0];
   timerRunning = false;
 
   textArea.value = "";
