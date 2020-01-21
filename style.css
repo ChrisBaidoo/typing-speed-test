@@ -140,6 +140,8 @@ body {
 .test-wrapper {
     border: 10px solid grey;
     border-radius: 10px;
+    margin-top: 0.5em;
+
 }
 
 #origin-text {
@@ -186,4 +188,9 @@ body {
 #reset:hover {
     color: white;
     background-color: #E95D0F;
+}
+
+#beginner {
+    /* padding: .5em 1em; */
+
 }
